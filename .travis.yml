@@ -3,7 +3,6 @@ addons:
 
 before_install:
   - sudo mv /etc/apt/sources.list.d/pgdg-source.list* /tmp
-  - sudo apt-add-repository --yes ppa:cartodb/gis
   - sudo apt-get update
   - sudo apt-get install -q gdal-bin
   - psql -c 'create database template_postgis;' -U postgres
