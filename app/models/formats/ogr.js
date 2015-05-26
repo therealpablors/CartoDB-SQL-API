@@ -151,8 +151,8 @@ OgrFormat.prototype.toOGR = function(options, out_format, out_filename, callback
         '-lco', 'ENCODING=UTF-8',
         '-lco', 'LINEFORMAT=CRLF',
         out_filename,
-        "PG:host=" + dbhost + " port=" + dbport + " user=" + dbuser + " dbname=" + dbname + " password=" + dbpass,
-        'tables=' + tables,
+        "PG:host=" + dbhost + " port=" + dbport + " user=" + dbuser + " dbname=" + dbname + " password=" + dbpass +
+            ' tables=' + tables,
         '-sql', ogrsql
       ];
 
