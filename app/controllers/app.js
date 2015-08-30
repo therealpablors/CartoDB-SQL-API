@@ -66,6 +66,7 @@ var cdbReq = new CdbRequest();
 // Set default configuration 
 global.settings.db_pubuser = global.settings.db_pubuser || "publicuser";
 global.settings.bufferedRows = global.settings.bufferedRows || 1000;
+global.settings.maxRows = global.settings.maxRows || 100; //100 is a number, that position is for set number of N max rows that you want
 
 var tableCache = LRU({
   // store no more than these many items in the cache
@@ -237,7 +238,7 @@ function handleQuery(req, res) {
         format    = (format   === "" || _.isUndefined(format))   ? 'json' : format.toLowerCase();
         filename  = (filename === "" || _.isUndefined(filename)) ? 'cartodb-query' : sanitize_filename(filename);
         sql       = (sql      === "" || _.isUndefined(sql))      ? null : sql;
-        limit     = (!_.isNaN(limit))  ? limit : null;
+        limit     = (!_.isNaN(limit))  ? limit : global.settings.maxRows; //if the user doesn't set limit in params the system set this limit reading maxRows in global object 
         offset    = (!_.isNaN(offset)) ? offset * limit : null;
 
         // Accept both comma-separated string or array of comma-separated strings
